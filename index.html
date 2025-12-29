@@ -1,0 +1,456 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="en">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>\uc0\u55356 \u57317  Tekkali Hospital Management System</title>\
+    <style>\
+        * \{ margin: 0; padding: 0; box-sizing: border-box; \}\
+        body \{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; \}\
+        .header \{ background: linear-gradient(135deg, #2c5530, #4a7c59); color: white; padding: 1.5rem; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); \}\
+        .header h1 \{ font-size: 2.2rem; margin-bottom: 0.5rem; \}\
+        .nav \{ background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 1rem; box-shadow: 0 2px 20px rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; \}\
+        .nav button \{ background: linear-gradient(135deg, #2c5530, #4a7c59); color: white; border: none; padding: 0.8rem 1.8rem; border-radius: 25px; cursor: pointer; font-size: 1rem; font-weight: 500; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(44,85,48,0.3); \}\
+        .nav button:hover \{ transform: translateY(-2px); box-shadow: 0 6px 20px rgba(44,85,48,0.4); \}\
+        .nav button.active \{ background: linear-gradient(135deg, #4a7c59, #2c5530); transform: scale(1.05); \}\
+        .container \{ max-width: 1400px; margin: 2rem auto; padding: 0 1.5rem; \}\
+        .section \{ display: none; animation: fadeIn 0.5s ease-in; \}\
+        .section.active \{ display: block; \}\
+        @keyframes fadeIn \{ from \{ opacity: 0; transform: translateY(20px); \} to \{ opacity: 1; transform: translateY(0); \} \}\
+        .dashboard \{ display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; \}\
+        .card \{ background: rgba(255,255,255,0.95); backdrop-filter: blur(15px); padding: 2rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.2); \}\
+        .stats \{ display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 1rem; \}\
+        .stat \{ flex: 1; min-width: 120px; padding: 1.5rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border-radius: 15px; \}\
+        .stat h3 \{ font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem; \}\
+        .stat.blue \{ background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); \}\
+        .stat.green \{ background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); \}\
+        table \{ width: 100%; border-collapse: collapse; margin-top: 1rem; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); \}\
+        th \{ background: linear-gradient(135deg, #2c5530, #4a7c59); color: white; padding: 1.2rem; text-align: left; font-weight: 600; \}\
+        td \{ padding: 1rem 1.2rem; border-bottom: 1px solid #eee; \}\
+        tr:hover \{ background: #f8f9ff; \}\
+        .form-group \{ margin-bottom: 1.5rem; \}\
+        input, select, textarea \{ width: 100%; padding: 1rem; border: 2px solid #e1e5e9; border-radius: 10px; font-size: 1rem; transition: all 0.3s ease; background: rgba(255,255,255,0.9); \}\
+        input:focus, select:focus, textarea:focus \{ outline: none; border-color: #2c5530; box-shadow: 0 0 0 3px rgba(44,85,48,0.1); \}\
+        .btn \{ background: linear-gradient(135deg, #2c5530, #4a7c59); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 500; margin-right: 0.5rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(44,85,48,0.3); \}\
+        .btn:hover \{ transform: translateY(-2px); box-shadow: 0 6px 20px rgba(44,85,48,0.4); \}\
+        .btn-danger \{ background: linear-gradient(135deg, #ff6b6b, #ee5a52); box-shadow: 0 4px 15px rgba(238,90,82,0.3); \}\
+        .btn-danger:hover \{ box-shadow: 0 6px 20px rgba(238,90,82,0.4); \}\
+        .search-box \{ margin-bottom: 1.5rem; \}\
+        .search-box input \{ background: rgba(255,255,255,0.9); \}\
+        .modal \{ display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; backdrop-filter: blur(5px); \}\
+        .modal-content \{ background: white; margin: 5% auto; padding: 2.5rem; width: 90%; max-width: 550px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: modalSlideIn 0.3s ease; \}\
+        @keyframes modalSlideIn \{ from \{ opacity: 0; transform: translateY(-50px); \} to \{ opacity: 1; transform: translateY(0); \} \}\
+        .status-badge \{ padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; \}\
+        .status-scheduled \{ background: #fff3cd; color: #856404; \}\
+        .status-completed \{ background: #d4edda; color: #155724; \}\
+        .status-cancelled \{ background: #f8d7da; color: #721c24; \}\
+        @media (max-width: 768px) \{ .nav \{ flex-direction: column; gap: 0.8rem; \} .header h1 \{ font-size: 1.8rem; \} .stats \{ flex-direction: column; \} table \{ font-size: 0.9rem; \} \}\
+    </style>\
+</head>\
+<body>\
+    <div class="header">\
+        <h1>\uc0\u55356 \u57317  Tekkali Hospital Management System</h1>\
+        <p>\uc0\u55357 \u56525  Tekkali, Andhra Pradesh | Digital Healthcare Excellence</p>\
+    </div>\
+\
+    <div class="nav">\
+        <button onclick="showSection('dashboard')" class="active">\uc0\u55357 \u56522  Dashboard</button>\
+        <button onclick="showSection('patients')">\uc0\u55357 \u56421  Patients</button>\
+        <button onclick="showSection('appointments')">\uc0\u55357 \u56517  Appointments</button>\
+        <button onclick="showSection('staff')">\uc0\u55357 \u56424 \u8205 \u9877 \u65039  Staff</button>\
+    </div>\
+\
+    <div class="container">\
+        <!-- Dashboard -->\
+        <div id="dashboard" class="section active">\
+            <div class="dashboard">\
+                <div class="card">\
+                    <h2>\uc0\u55357 \u56520  Quick Statistics</h2>\
+                    <div class="stats">\
+                        <div class="stat blue">\
+                            <h3 id="totalPatients">0</h3>\
+                            <p>Total Patients</p>\
+                        </div>\
+                        <div class="stat green">\
+                            <h3 id="todayAppointments">0</h3>\
+                            <p>Today's Appts</p>\
+                        </div>\
+                        <div class="stat">\
+                            <h3 id="totalStaff">0</h3>\
+                            <p>Total Staff</p>\
+                        </div>\
+                    </div>\
+                </div>\
+            </div>\
+        </div>\
+\
+        <!-- Patients -->\
+        <div id="patients" class="section">\
+            <div class="card">\
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">\
+                    <h2>\uc0\u55357 \u56421  Patient Management</h2>\
+                    <button class="btn" onclick="openModal('patientModal')">\uc0\u10133  Add Patient</button>\
+                </div>\
+                <div class="search-box">\
+                    <input type="text" id="patientSearch" placeholder="\uc0\u55357 \u56589  Search patients by name, phone..." onkeyup="filterTable('patientTable', this.value)">\
+                </div>\
+                <table id="patientTable">\
+                    <thead>\
+                        <tr><th>ID</th><th>Name</th><th>Age</th><th>Phone</th><th>Condition</th><th>Actions</th></tr>\
+                    </thead>\
+                    <tbody></tbody>\
+                </table>\
+            </div>\
+        </div>\
+\
+        <!-- Appointments -->\
+        <div id="appointments" class="section">\
+            <div class="card">\
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">\
+                    <h2>\uc0\u55357 \u56517  Appointments</h2>\
+                    <button class="btn" onclick="openModal('apptModal')">\uc0\u10133  New Appt</button>\
+                </div>\
+                <div class="search-box">\
+                    <input type="text" id="apptSearch" placeholder="\uc0\u55357 \u56589  Search appointments..." onkeyup="filterTable('apptTable', this.value)">\
+                </div>\
+                <table id="apptTable">\
+                    <thead>\
+                        <tr><th>Date</th><th>Time</th><th>Patient</th><th>Doctor</th><th>Status</th><th>Actions</th></tr>\
+                    </thead>\
+                    <tbody></tbody>\
+                </table>\
+            </div>\
+        </div>\
+\
+        <!-- Staff -->\
+        <div id="staff" class="section">\
+            <div class="card">\
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">\
+                    <h2>\uc0\u55357 \u56424 \u8205 \u9877 \u65039  Staff Management</h2>\
+                    <button class="btn" onclick="openModal('staffModal')">\uc0\u10133  Add Staff</button>\
+                </div>\
+                <table id="staffTable">\
+                    <thead>\
+                        <tr><th>ID</th><th>Name</th><th>Role</th><th>Phone</th><th>Salary</th><th>Actions</th></tr>\
+                    </thead>\
+                    <tbody></tbody>\
+                </table>\
+            </div>\
+        </div>\
+    </div>\
+\
+    <!-- Patient Modal -->\
+    <div id="patientModal" class="modal">\
+        <div class="modal-content">\
+            <h2 id="patientModalTitle">Add New Patient</h2>\
+            <form id="patientForm">\
+                <div class="form-group"><input type="text" id="patientName" placeholder="Full Name" required></div>\
+                <div class="form-group"><input type="number" id="patientAge" placeholder="Age" min="0" max="120" required></div>\
+                <div class="form-group"><input type="tel" id="patientPhone" placeholder="Phone Number" required></div>\
+                <div class="form-group"><textarea id="patientCondition" placeholder="Medical Condition / Notes" rows="3"></textarea></div>\
+                <div style="text-align: right; margin-top: 2rem;">\
+                    <button type="button" class="btn" onclick="closeModal('patientModal')">Cancel</button>\
+                    <button type="submit" class="btn">\uc0\u55357 \u56510  Save Patient</button>\
+                </div>\
+            </form>\
+        </div>\
+    </div>\
+\
+    <!-- Appointment Modal -->\
+    <div id="apptModal" class="modal">\
+        <div class="modal-content">\
+            <h2 id="apptModalTitle">New Appointment</h2>\
+            <form id="apptForm">\
+                <div class="form-group"><input type="date" id="apptDate" required></div>\
+                <div class="form-group"><input type="time" id="apptTime" required></div>\
+                <div class="form-group"><input type="text" id="apptPatient" placeholder="Patient Name" required></div>\
+                <div class="form-group">\
+                    <select id="apptDoctor" required>\
+                        <option value="">Select Doctor</option>\
+                    </select>\
+                </div>\
+                <div class="form-group">\
+                    <select id="apptStatus">\
+                        <option value="Scheduled">\uc0\u9200  Scheduled</option>\
+                        <option value="Completed">\uc0\u9989  Completed</option>\
+                        <option value="Cancelled">\uc0\u10060  Cancelled</option>\
+                    </select>\
+                </div>\
+                <div style="text-align: right; margin-top: 2rem;">\
+                    <button type="button" class="btn" onclick="closeModal('apptModal')">Cancel</button>\
+                    <button type="submit" class="btn">\uc0\u55357 \u56510  Schedule</button>\
+                </div>\
+            </form>\
+        </div>\
+    </div>\
+\
+    <!-- Staff Modal -->\
+    <div id="staffModal" class="modal">\
+        <div class="modal-content">\
+            <h2 id="staffModalTitle">Add Staff Member</h2>\
+            <form id="staffForm">\
+                <div class="form-group"><input type="text" id="staffName" placeholder="Full Name" required></div>\
+                <div class="form-group">\
+                    <select id="staffRole" required>\
+                        <option value="">Select Role</option>\
+                        <option value="Doctor">\uc0\u55357 \u56424 \u8205 \u9877 \u65039  Doctor</option>\
+                        <option value="Nurse">\uc0\u55357 \u56425 \u8205 \u9877 \u65039  Nurse</option>\
+                        <option value="Admin">\uc0\u55357 \u56508  Admin</option>\
+                        <option value="Pharmacist">\uc0\u55357 \u56458  Pharmacist</option>\
+                    </select>\
+                </div>\
+                <div class="form-group"><input type="tel" id="staffPhone" placeholder="Phone" required></div>\
+                <div class="form-group"><input type="number" id="staffSalary" placeholder="Monthly Salary (\uc0\u8377 )" min="0" required></div>\
+                <div style="text-align: right; margin-top: 2rem;">\
+                    <button type="button" class="btn" onclick="closeModal('staffModal')">Cancel</button>\
+                    <button type="submit" class="btn">\uc0\u55357 \u56510  Add Staff</button>\
+                </div>\
+            </form>\
+        </div>\
+    </div>\
+\
+    <script>\
+        // Data Storage\
+        let patients = JSON.parse(localStorage.getItem('hms_patients')) || [];\
+        let appointments = JSON.parse(localStorage.getItem('hms_appointments')) || [];\
+        let staff = JSON.parse(localStorage.getItem('hms_staff')) || [];\
+        let editingId = null;\
+        let editingType = null;\
+\
+        // Sample Data (uncomment to populate)\
+        // if (patients.length === 0) patients = [\{id:1,name:'Ravi Kumar',age:45,phone:'9876543210',condition:'Diabetes Type 2'\}];\
+        // if (staff.length === 0) staff = [\{id:1,name:'Dr. Priya Sharma',role:'Doctor',phone:'9123456789',salary:75000\}];\
+\
+        function init() \{\
+            renderPatients();\
+            renderAppointments();\
+            renderStaff();\
+            updateDashboard();\
+            populateDoctorDropdown();\
+        \}\
+\
+        function showSection(sectionId) \{\
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));\
+            document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));\
+            document.getElementById(sectionId).classList.add('active');\
+            event.target.classList.add('active');\
+        \}\
+\
+        function openModal(modalId, item = null) \{\
+            const modal = document.getElementById(modalId);\
+            modal.style.display = 'block';\
+            editingId = item ? item.id : null;\
+            editingType = modalId.replace('Modal', '').toLowerCase();\
+            \
+            if (item) \{\
+                populateForm(item, modalId);\
+                document.getElementById(modalId.replace('Modal', 'Title')).textContent = `Edit $\{item.name\}`;\
+            \} else \{\
+                document.getElementById(modalId.replace('Modal', 'Form')).reset();\
+                document.getElementById(modalId.replace('Modal', 'Title')).textContent = `Add $\{modalId.includes('Patient') ? 'Patient' : modalId.includes('staff') ? 'Staff Member' : 'Appointment'\}`;\
+                populateDoctorDropdown();\
+            \}\
+        \}\
+\
+        function closeModal(modalId = null) \{\
+            if (!modalId) \{\
+                document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');\
+            \} else \{\
+                document.getElementById(modalId).style.display = 'none';\
+            \}\
+            editingId = null;\
+        \}\
+\
+        function populateForm(item, modalId) \{\
+            const formId = modalId.replace('Modal', 'Form');\
+            const formData = document.getElementById(formId);\
+            const inputs = formData.querySelectorAll('input, select, textarea');\
+            \
+            inputs.forEach(input => \{\
+                const key = input.id.replace(`$\{editingType\}`, '');\
+                if (item[key]) input.value = item[key];\
+            \});\
+        \}\
+\
+        // Patient Management\
+        document.getElementById('patientForm').addEventListener('submit', function(e) \{\
+            e.preventDefault();\
+            const patient = \{\
+                id: editingId || Date.now(),\
+                name: document.getElementById('patientName').value,\
+                age: document.getElementById('patientAge').value,\
+                phone: document.getElementById('patientPhone').value,\
+                condition: document.getElementById('patientCondition').value\
+            \};\
+            \
+            if (editingId) \{\
+                patients = patients.map(p => p.id == editingId ? patient : p);\
+            \} else \{\
+                patients.push(patient);\
+            \}\
+            \
+            localStorage.setItem('hms_patients', JSON.stringify(patients));\
+            renderPatients();\
+            updateDashboard();\
+            closeModal('patientModal');\
+        \});\
+\
+        function renderPatients() \{\
+            const tbody = document.querySelector('#patientTable tbody');\
+            tbody.innerHTML = patients.map(p => `\
+                <tr>\
+                    <td>$\{p.id\}</td>\
+                    <td>$\{p.name\}</td>\
+                    <td>$\{p.age\}</td>\
+                    <td>$\{p.phone\}</td>\
+                    <td>$\{p.condition || 'N/A'\}</td>\
+                    <td>\
+                        <button class="btn" onclick="openModal('patientModal', $\{JSON.stringify(p)\})">\uc0\u9999 \u65039  Edit</button>\
+                        <button class="btn btn-danger" onclick="deleteItem('patients', $\{p.id\})">\uc0\u55357 \u56785 \u65039  Delete</button>\
+                    </td>\
+                </tr>\
+            `).join('') || '<tr><td colspan="6" style="text-align:center;color:#666;padding:3rem;">No patients yet. Add your first patient! \uc0\u55357 \u56390 </td></tr>';\
+        \}\
+\
+        // Appointments Management\
+        document.getElementById('apptForm').addEventListener('submit', function(e) \{\
+            e.preventDefault();\
+            const appt = \{\
+                id: editingId || Date.now(),\
+                date: document.getElementById('apptDate').value,\
+                time: document.getElementById('apptTime').value,\
+                patient: document.getElementById('apptPatient').value,\
+                doctor: document.getElementById('apptDoctor').value,\
+                status: document.getElementById('apptStatus').value\
+            \};\
+            \
+            if (editingId) \{\
+                appointments = appointments.map(a => a.id == editingId ? appt : a);\
+            \} else \{\
+                appointments.push(appt);\
+            \}\
+            \
+            localStorage.setItem('hms_appointments', JSON.stringify(appointments));\
+            renderAppointments();\
+            updateDashboard();\
+            closeModal('apptModal');\
+        \});\
+\
+        function renderAppointments() \{\
+            const tbody = document.querySelector('#apptTable tbody');\
+            const today = new Date().toISOString().split('T')[0];\
+            tbody.innerHTML = appointments.map(a => \{\
+                const statusClass = a.status.toLowerCase().replace(' ', '-');\
+                return `\
+                <tr>\
+                    <td>$\{a.date\}</td>\
+                    <td>$\{a.time\}</td>\
+                    <td>$\{a.patient\}</td>\
+                    <td>$\{a.doctor\}</td>\
+                    <td><span class="status-badge status-$\{statusClass\}">$\{a.status\}</span></td>\
+                    <td>\
+                        <button class="btn" onclick="openModal('apptModal', $\{JSON.stringify(a)\})">\uc0\u9999 \u65039  Edit</button>\
+                        <button class="btn btn-danger" onclick="deleteItem('appointments', $\{a.id\})">\uc0\u55357 \u56785 \u65039  Delete</button>\
+                    </td>\
+                </tr>\
+            `\}).join('') || '<tr><td colspan="6" style="text-align:center;color:#666;padding:3rem;">No appointments. Schedule your first one! \uc0\u55357 \u56517 </td></tr>';\
+        \}\
+\
+        // Staff Management\
+        document.getElementById('staffForm').addEventListener('submit', function(e) \{\
+            e.preventDefault();\
+            const staffMember = \{\
+                id: editingId || Date.now(),\
+                name: document.getElementById('staffName').value,\
+                role: document.getElementById('staffRole').value,\
+                phone: document.getElementById('staffPhone').value,\
+                salary: parseInt(document.getElementById('staffSalary').value)\
+            \};\
+            \
+            if (editingId) \{\
+                staff = staff.map(s => s.id == editingId ? staffMember : s);\
+            \} else \{\
+                staff.push(staffMember);\
+            \}\
+            \
+            localStorage.setItem('hms_staff', JSON.stringify(staff));\
+            renderStaff();\
+            populateDoctorDropdown();\
+            updateDashboard();\
+            closeModal('staffModal');\
+        \});\
+\
+        function renderStaff() \{\
+            const tbody = document.querySelector('#staffTable tbody');\
+            tbody.innerHTML = staff.map(s => `\
+                <tr>\
+                    <td>$\{s.id\}</td>\
+                    <td><strong>$\{s.name\}</strong></td>\
+                    <td>$\{s.role\}</td>\
+                    <td>$\{s.phone\}</td>\
+                    <td>\uc0\u8377 $\{s.salary.toLocaleString()\}</td>\
+                    <td>\
+                        <button class="btn" onclick="openModal('staffModal', $\{JSON.stringify(s)\})">\uc0\u9999 \u65039  Edit</button>\
+                        <button class="btn btn-danger" onclick="deleteItem('staff', $\{s.id\})">\uc0\u55357 \u56785 \u65039  Delete</button>\
+                    </td>\
+                </tr>\
+            `).join('') || '<tr><td colspan="6" style="text-align:center;color:#666;padding:3rem;">No staff members. Add doctors & nurses! \uc0\u55357 \u56424 \u8205 \u9877 \u65039 </td></tr>';\
+        \}\
+\
+        function populateDoctorDropdown() \{\
+            const select = document.getElementById('apptDoctor');\
+            select.innerHTML = '<option value="">Select Doctor</option>' + \
+                staff.filter(s => s.role === 'Doctor').map(d => \
+                    `<option value="$\{d.name\}">$\{d.name\}</option>`\
+                ).join('');\
+        \}\
+\
+        function deleteItem(type, id) \{\
+            if (confirm(`Delete this $\{type.slice(0,-1)\}?`)) \{\
+                window[type] = window[type].filter(item => item.id != id);\
+                localStorage.setItem(`hms_$\{type\}`, JSON.stringify(window[type]));\
+                \
+                if (type === 'patients') renderPatients();\
+                if (type === 'appointments') renderAppointments();\
+                if (type === 'staff') \{\
+                    renderStaff();\
+                    populateDoctorDropdown();\
+                \}\
+                updateDashboard();\
+            \}\
+        \}\
+\
+        function updateDashboard() \{\
+            document.getElementById('totalPatients').textContent = patients.length;\
+            const today = new Date().toISOString().split('T')[0];\
+            document.getElementById('todayAppointments').textContent = appointments.filter(a => a.date === today).length;\
+            document.getElementById('totalStaff').textContent = staff.length;\
+        \}\
+\
+        function filterTable(tableId, searchTerm) \{\
+            const rows = document.querySelectorAll(`#$\{tableId\} tbody tr`);\
+            rows.forEach(row => \{\
+                const text = row.textContent.toLowerCase();\
+                row.style.display = text.includes(searchTerm.toLowerCase()) ? '' : 'none';\
+            \});\
+        \}\
+\
+        // Event Listeners\
+        window.onclick = function(event) \{\
+            if (event.target.classList.contains('modal')) \{\
+                closeModal();\
+            \}\
+        \};\
+\
+        document.addEventListener('DOMContentLoaded', init);\
+    </script>\
+</body>\
+</html>\
+}
